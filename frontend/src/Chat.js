@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Chat.css";
 
 export default function ChatApp() {
   const [apiKey, setApiKey] = useState("");
@@ -31,31 +32,31 @@ export default function ChatApp() {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-white shadow-md rounded-lg">
-      <h1 className="text-xl font-bold">Chat com Groq</h1>
+    <div className="chat-container">
+      <h1 className="chat-header">Chat GROQ </h1>
       <input
-        type="text"
-        className="w-full p-2 border rounded-md"
+        type="password"
+        className="chat-input"
         value={apiKey}
         onChange={(e) => setApiKey(e.target.value)}
         placeholder="Insira sua API Key"
       />
-      <div className="h-64 overflow-y-auto border p-2 my-2">
+      <div className="chat-messages">
         {messages.map((msg, index) => (
-          <div key={index} className={msg.role === "user" ? "text-right" : "text-left"}>
-            <p className="p-2 my-1 rounded-md bg-gray-100">{msg.content}</p>
+          <div key={index} className={`chat-message ${msg.role}`}>
+            <p>{msg.content}</p>
           </div>
         ))}
       </div>
       <input
         type="text"
-        className="w-full p-2 border rounded-md"
+        className="chat-input"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Digite sua mensagem..."
       />
       <button
-        className="w-full mt-2 p-2 bg-blue-500 text-white rounded-md"
+        className="chat-button"
         onClick={sendMessage}
       >Enviar</button>
     </div>
